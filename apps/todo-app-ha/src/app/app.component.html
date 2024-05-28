@@ -1,7 +1,8 @@
 <h1>ToDo App</h1>
-@for (todo of todos(); track todo.id) {
-  <p>{{ todo.text }}</p>
-}
-@empty {
-  <b>-- empty --</b>
-}
+<div class="todo-container">
+  @for (todo of todos(); track todo.id) {
+    <ha-todo [todo]="todo"></ha-todo>
+  }
+  <ha-new-todo></ha-new-todo>
+</div>
+

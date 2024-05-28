@@ -17,4 +17,12 @@ export class ToDoService {
       `${this.subUrl}?clientId=${this.environment.clientId}`
     );
   }
+
+  postTodo(text: string): Observable<any> {
+    return this.http.post(`${this.subUrl}`, {
+      clientId: this.environment.clientId,
+      text,
+      completed: false,
+    });
+  }
 }

@@ -1,11 +1,16 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, input } from '@angular/core';
+import { TodoItem } from '@todo-app-ha/types';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'ha-todo',
   standalone: true,
-  imports: [],
+  imports: [MatCardModule, MatIconModule, MatButtonModule],
   templateUrl: './todo-item.component.html',
-  styleUrl: './todo-item.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
-export class TodoItemComponent {}
+export class TodoItemComponent {
+  todo = input.required<TodoItem>();
+}

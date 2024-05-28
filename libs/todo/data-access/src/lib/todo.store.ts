@@ -16,5 +16,22 @@ export const ToDoStore = signalStore(
           patchState(store, () => ({ data }));
         });
     },
+    createTodo(text: string): Promise<void> {
+      return new Promise((resolve, reject) =>
+        toDoSvc
+          .postTodo(text)
+          .pipe(first())
+          .subscribe({
+            next: (a) => {
+              console.log(a);
+              this.getToDos();
+              resolve();
+            },
+            error: () => {
+              reject();
+            },
+          })
+      );
+    },
   }))
 );

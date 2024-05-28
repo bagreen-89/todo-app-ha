@@ -1,0 +1,24 @@
+ha-root {
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    flex: 0 0 0;
+  }
+
+  div.todo-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    flex: 1 1 auto;
+    min-height: 1px;
+    margin: 0 1rem 1rem 1rem;
+    gap: 1rem;
+
+    mat-card {
+      background-color: #FFEEC1;
+    }
+  }
+}

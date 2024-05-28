@@ -1,1 +1,12 @@
-<p>todo-components works!</p>
+<mat-card appearance="outlined">
+  <mat-card-content>
+    {{ todo().text }}
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-icon-button>
+      <mat-icon color="primary">edit</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon color="warn">delete</mat-icon>
+    </button></mat-card-actions>
+</mat-card>
