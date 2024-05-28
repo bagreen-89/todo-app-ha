@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@todo-app-ha/todo": ["libs/todo/src/index.ts"],
+      "@todo-app-ha/todo/components": ["libs/todo/components/src/index.ts"],
+      "@todo-app-ha/todo/data-access": ["libs/todo/data-access/src/index.ts"],
+      "@todo-app-ha/tokens": ["libs/shared/tokens/src/index.ts"],
       "@todo-app-ha/types": ["libs/shared/types/src/index.ts"]
     }
   },

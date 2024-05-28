@@ -1,1 +1,7 @@
 <h1>ToDo App</h1>
+@for (todo of todos(); track todo.id) {
+  <p>{{ todo.text }}</p>
+}
+@empty {
+  <b>-- empty --</b>
+}

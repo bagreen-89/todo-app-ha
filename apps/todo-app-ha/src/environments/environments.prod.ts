@@ -1,4 +1,4 @@
-import { Environment } from "./environment.interface";
+import { Environment } from "@todo-app-ha/types";
 
 export const environment: Environment = {
   clientId: "pm",
