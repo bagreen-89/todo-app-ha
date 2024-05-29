@@ -1,7 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
+html {
+  height: 100vh;
+  min-width: 400px;
+}
+
+body {
+  width: 100%;
   min-height: 100vh;
-  width: 100vw;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -21,6 +26,3 @@ input, button, textarea, select {
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
