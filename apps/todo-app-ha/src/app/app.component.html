@@ -1,8 +1,8 @@
 <h1>ToDo App</h1>
 <div class="todo-container">
+  <ha-new-todo></ha-new-todo>
   @for (todo of todos(); track todo.id) {
     <ha-todo [todo]="todo"></ha-todo>
   }
-  <ha-new-todo></ha-new-todo>
 </div>
 

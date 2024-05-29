@@ -10,19 +10,33 @@ import { Observable } from 'rxjs';
 export class ToDoService {
   private readonly environment = inject(ENVIRONMENT_CONFIG);
   private readonly http = inject(HttpClient);
-  private readonly subUrl = `${this.environment.apiUrl}/todos`;
+  private readonly featureUrl = `${this.environment.apiUrl}/todos`;
 
   getTodos(): Observable<TodoItem[]> {
     return this.http.get<TodoItem[]>(
-      `${this.subUrl}?clientId=${this.environment.clientId}`
+      `${this.featureUrl}?clientId=${this.environment.clientId}`
     );
   }
 
   postTodo(text: string): Observable<any> {
-    return this.http.post(`${this.subUrl}`, {
+    return this.http.post(`${this.featureUrl}`, {
       clientId: this.environment.clientId,
       text,
       completed: false,
     });
+  }
+
+  removeTodo(id: number): Observable<number> {
+    return this.http.delete<number>(`${this.featureUrl}/${id}`);
+  }
+
+  updateTodo(
+    id: number,
+    updates:
+      | { text: string }
+      | { completed: boolean }
+      | { text: string; completed: boolean }
+  ): Observable<TodoItem> {
+    return this.http.put<TodoItem>(`${this.featureUrl}/${id}`, updates);
   }
 }

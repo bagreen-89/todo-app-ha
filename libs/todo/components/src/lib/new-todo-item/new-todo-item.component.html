@@ -10,7 +10,7 @@
   </mat-card-content>
   @if (todoFormControl.value?.length) {
     <mat-card-actions align="end">
-      <button (click)="createTodo()" mat-icon-button>
+      <button (click)="createTodo()" [disabled]="todoFormControl.disabled" mat-icon-button>
         <mat-icon color="primary">add</mat-icon>
       </button>
       <button (click)="resetText()" mat-icon-button>

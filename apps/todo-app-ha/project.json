@@ -28,7 +28,7 @@
           }
         ],
         "styles": [
-          "@angular/material/prebuilt-themes/deeppurple-amber.css",
+          "@angular/material/prebuilt-themes/indigo-pink.css",
           "apps/todo-app-ha/src/styles.scss"
         ],
         "scripts": []

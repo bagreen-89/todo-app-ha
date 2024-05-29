@@ -5,3 +5,8 @@ export interface TodoItem {
   completed: boolean;
   text: string;
 }
+
+export type TodoItemUpdate =
+  | { completed: boolean }
+  | { text: string }
+  | { completed: boolean; text: string };

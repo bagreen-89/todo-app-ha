@@ -24,7 +24,7 @@ import { ToDoStore } from '@todo-app-ha/todo/data-access';
   encapsulation: ViewEncapsulation.None,
 })
 export class NewTodoItemComponent {
-  todoStore = inject(ToDoStore);
+  readonly todoStore = inject(ToDoStore);
   todoFormControl = new FormControl<string>('');
 
   resetText() {
