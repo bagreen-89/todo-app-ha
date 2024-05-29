@@ -1,13 +1,42 @@
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withComputed,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { ToDoState, initialState } from './store/todo.state';
 import { ToDoService } from './todo.service';
-import { inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { first } from 'rxjs';
 import { TodoItem, TodoItemUpdate } from '@todo-app-ha/types';
 
 export const ToDoStore = signalStore(
   { providedIn: 'root' },
   withState<ToDoState>(initialState),
+
+  withComputed(({ data, showCompleted }) => ({
+    visibleTodos: computed(() =>
+      showCompleted() ? data() : data().filter((item) => !item.completed)
+    ),
+    completedCount: computed(() =>
+      data().reduce((result, item) => {
+        if (item.completed) {
+          result++;
+        }
+        return result;
+      }, 0)
+    ),
+    notCompletedCount: computed(() =>
+      data().reduce((result, item) => {
+        if (!item.completed) {
+          result++;
+        }
+        return result;
+      }, 0)
+    ),
+  })),
+
   withMethods((store, toDoSvc = inject(ToDoService)) => ({
     getToDos(): void {
       patchState(store, (state) => ({ ...state }));
@@ -73,6 +102,17 @@ export const ToDoStore = signalStore(
             },
           })
       );
+    },
+
+    completeAllTodos(): void {
+      toDoSvc
+        .completeAllTodos()
+        .pipe(first())
+        .subscribe(() => this.getToDos());
+    },
+
+    setShowCompleted(showCompleted: boolean): void {
+      patchState(store, (state) => ({ ...state, showCompleted }));
     },
   }))
 );

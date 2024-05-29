@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ENVIRONMENT_CONFIG } from '@todo-app-ha/tokens';
-import { TodoItem } from '@todo-app-ha/types';
+import { TodoItem, TodoItemUpdate } from '@todo-app-ha/types';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -30,13 +30,14 @@ export class ToDoService {
     return this.http.delete<number>(`${this.featureUrl}/${id}`);
   }
 
-  updateTodo(
-    id: number,
-    updates:
-      | { text: string }
-      | { completed: boolean }
-      | { text: string; completed: boolean }
-  ): Observable<TodoItem> {
+  updateTodo(id: number, updates: TodoItemUpdate): Observable<TodoItem> {
     return this.http.put<TodoItem>(`${this.featureUrl}/${id}`, updates);
+  }
+
+  completeAllTodos() {
+    return this.http.patch<[]>(
+      `${this.featureUrl}/mark-all-as-completed?clientId=${this.environment.clientId}`,
+      {}
+    );
   }
 }

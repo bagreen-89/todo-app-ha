@@ -11,28 +11,48 @@
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button (click)="confirmChanges()" [disabled]="todoFormControl.invalid || todoFormControl.disabled" mat-icon-button>
+      <button
+        (click)="confirmChanges()"
+        [autofocus]="false"
+        [disabled]="todoFormControl.invalid || todoFormControl.disabled"
+        mat-icon-button>
         <mat-icon color="primary">check</mat-icon>
       </button>
-      <button (click)="cancelEdit()" mat-icon-button>
+      <button
+        (click)="cancelEdit()"
+        [autofocus]="false"
+        mat-icon-button>
         <mat-icon color="accent">close</mat-icon>
       </button>
-      <button (click)="removeTodo()" mat-icon-button>
+      <button
+        (click)="removeTodo()"
+        [autofocus]="false"
+        mat-icon-button>
         <mat-icon color="warn">delete</mat-icon>
       </button>
     </mat-card-actions>
   }
   @else {
     <mat-card-content>
-      <mat-checkbox (change)="changeCompletion($event)" [checked]="todo().completed" labelPosition="before">
+      <mat-checkbox
+        (change)="changeCompletion($event)"
+        [autofocus]="false"
+        [checked]="todo().completed"
+        labelPosition="before">
         {{ todo().text }}
       </mat-checkbox>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button (click)="toggleEdit()" mat-icon-button>
+      <button
+        (click)="toggleEdit()"
+        [autofocus]="false"
+        mat-icon-button>
         <mat-icon color="primary">edit</mat-icon>
       </button>
-      <button (click)="removeTodo()" mat-icon-button>
+      <button
+        (click)="removeTodo()"
+        [autofocus]="false"
+        mat-icon-button>
         <mat-icon color="warn">delete</mat-icon>
       </button>
     </mat-card-actions>

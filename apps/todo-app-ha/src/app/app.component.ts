@@ -1,6 +1,8 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   NewTodoItemComponent,
+  TodoControlPanelComponent,
+  TodoInfoPanelComponent,
   TodoItemComponent,
 } from '@todo-app-ha/todo/components';
 import { ToDoStore } from '@todo-app-ha/todo/data-access';
@@ -12,12 +14,17 @@ import { ToDoStore } from '@todo-app-ha/todo/data-access';
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,
   providers: [ToDoStore],
-  imports: [TodoItemComponent, NewTodoItemComponent],
+  imports: [
+    TodoItemComponent,
+    NewTodoItemComponent,
+    TodoControlPanelComponent,
+    TodoInfoPanelComponent,
+  ],
 })
 export class AppComponent {
   private readonly toDoStore = inject(ToDoStore);
 
-  public todos = this.toDoStore.data;
+  public todos = this.toDoStore.visibleTodos;
 
   constructor() {
     this.toDoStore.getToDos();

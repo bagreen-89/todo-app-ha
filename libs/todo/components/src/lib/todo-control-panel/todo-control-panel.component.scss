@@ -1,0 +1,14 @@
+ha-todo-controls {
+  display: flex;
+  gap: 1rem;
+
+  // unsetting material styles so that the button has white foreground with bold text despite its contents being a mat-checkbox
+  button .mdc-form-field {
+    color: unset;
+    font-weight: unset;
+
+    .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked) ~ .mdc-checkbox__background {
+      border-color: unset !important;
+    }
+  }
+}
