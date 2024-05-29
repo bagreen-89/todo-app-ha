@@ -54,9 +54,11 @@ export const ToDoStore = signalStore(
           .postTodo(text)
           .pipe(first())
           .subscribe({
-            next: (a) => {
-              console.log(a);
-              this.getToDos();
+            next: (newItem) => {
+              patchState(store, (state) => ({
+                ...state,
+                data: [newItem, ...state.data],
+              }));
               resolve();
             },
             error: () => {
@@ -68,7 +70,7 @@ export const ToDoStore = signalStore(
 
     removeTodo(id: number): void {
       toDoSvc
-        .removeTodo(id)
+        .deleteTodo(id)
         .pipe(first())
         .subscribe((deletedCount: number) => {
           if (deletedCount > 0) {
@@ -83,7 +85,7 @@ export const ToDoStore = signalStore(
     updateTodo(id: number, updates: TodoItemUpdate): Promise<void> {
       return new Promise((resolve, reject) =>
         toDoSvc
-          .updateTodo(id, updates)
+          .putTodo(id, updates)
           .pipe(first())
           .subscribe({
             next: (newItem: TodoItem) => {
@@ -106,7 +108,7 @@ export const ToDoStore = signalStore(
 
     completeAllTodos(): void {
       toDoSvc
-        .completeAllTodos()
+        .patchAllTodosToCompleted()
         .pipe(first())
         .subscribe(() => this.getToDos());
     },
