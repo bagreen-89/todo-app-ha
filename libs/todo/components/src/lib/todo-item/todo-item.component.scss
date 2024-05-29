@@ -1,0 +1,22 @@
+ha-todo {
+  &.completed {
+    opacity: .6;
+  }
+
+  mat-checkbox {
+    width: 100%;
+
+    .mdc-form-field {
+      width: 100%;
+      justify-content: space-between;
+
+      label {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .mat-mdc-form-field-infix {
+    width: unset !important;
+  }
+}

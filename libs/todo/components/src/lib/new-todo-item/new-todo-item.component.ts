@@ -1,4 +1,10 @@
-import { Component, ViewEncapsulation, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewEncapsulation,
+  inject,
+  viewChild,
+} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -26,13 +32,15 @@ import { ToDoStore } from '@todo-app-ha/todo/data-access';
 export class NewTodoItemComponent {
   readonly todoStore = inject(ToDoStore);
   todoFormControl = new FormControl<string>('');
+  inputElement =
+    viewChild.required<ElementRef<HTMLTextAreaElement>>('inputField');
 
-  resetText() {
+  resetText(): void {
     this.todoFormControl.setValue('');
     this.todoFormControl.reset();
   }
 
-  createTodo() {
+  createTodo(): void {
     const value = this.todoFormControl.value;
     if (!value?.length) {
       return;
@@ -41,6 +49,22 @@ export class NewTodoItemComponent {
     this.todoStore
       .createTodo(value)
       .then(() => this.resetText())
-      .finally(() => this.todoFormControl.enable());
+      .finally(() => {
+        this.todoFormControl.enable();
+        this.inputElement().nativeElement.focus();
+      });
+  }
+
+  handleKeyDown(event: KeyboardEvent): void {
+    switch (event.key) {
+      case 'Enter':
+        event.preventDefault();
+        this.createTodo();
+        break;
+      case 'Escape':
+      case 'Esc':
+        this.resetText();
+        break;
+    }
   }
 }

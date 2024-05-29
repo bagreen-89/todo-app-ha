@@ -5,4 +5,7 @@ ha-new-todo {
   mat-form-field {
     width: 100%;
   }
+  .mat-mdc-form-field-infix {
+    width: unset !important;
+  }
 }

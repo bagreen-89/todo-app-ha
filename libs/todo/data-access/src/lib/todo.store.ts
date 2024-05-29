@@ -62,7 +62,9 @@ export const ToDoStore = signalStore(
                 ...state,
                 data: store
                   .data()
-                  .map((item) => (item.id === id ? newItem : item)),
+                  .map((item) =>
+                    item.id === id ? { ...item, ...newItem } : item
+                  ),
               }));
               resolve();
             },

@@ -1,11 +1,13 @@
 <mat-card appearance="outlined">
   <mat-card-content>
     <mat-form-field>
-      <input
+      <textarea
+        #inputField
+        (keydown)="handleKeyDown($event)"
         [formControl]="todoFormControl"
         matInput
-        placeholder="Write new note..."
-      />
+        placeholder="Write new note...">
+      </textarea>
     </mat-form-field>
   </mat-card-content>
   @if (todoFormControl.value?.length) {

@@ -2,11 +2,12 @@
   @if (isInEditMode()) {
     <mat-card-content>
       <mat-form-field>
-        <input
+        <textarea
+          (keydown)="handleKeyDown($event)"
           [formControl]="todoFormControl"
           matInput
-          placeholder="Enter note text"
-        />
+          placeholder="Enter note text">
+        </textarea>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">
@@ -23,7 +24,9 @@
   }
   @else {
     <mat-card-content>
-      {{ todo().text }}
+      <mat-checkbox (change)="changeCompletion($event)" [checked]="todo().completed" labelPosition="before">
+        {{ todo().text }}
+      </mat-checkbox>
     </mat-card-content>
     <mat-card-actions align="end">
       <button (click)="toggleEdit()" mat-icon-button>
